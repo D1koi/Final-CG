@@ -7,17 +7,22 @@ public class characterController : MonoBehaviour
 {
     private Animator _animator;
     private Rigidbody rb;
+    
+    
 
     public GameObject character;
     public GameObject reinicio;
+    
 
     [SerializeField] private float dashForce;
     [SerializeField] private float dashCD;
+    [SerializeField] private float remolinoCD;
 
     private void Start()
     {
         _animator = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();   
+               
     }
     
     #region Dash Code : Aqui esta la lógica del Dash
@@ -40,7 +45,19 @@ public class characterController : MonoBehaviour
     }
     #endregion
 
+    public void Remolino()
+    {
+        _animator.SetBool("castRemolino", true);
+        
+        Invoke("StopRemolino", remolinoCD);
+    }
+    private void StopRemolino()
+    {
+        _animator.SetBool("castRemolino", false);
+        
+    }
 
+    
 
 
 }
